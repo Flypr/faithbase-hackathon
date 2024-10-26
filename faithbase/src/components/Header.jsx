@@ -19,8 +19,8 @@ export default function Header() {
 					variant="default"
 					className={
 						pathname === '/pacient'
-							? 'bg-blue-500 hover:bg-blue-600 text-white'
-							: 'bg-white hover:bg-slate-300 text-gray-600 hover:text-gray-800 shadow-none'
+							? 'text-white'
+							: 'bg-transparent hover:bg-slate-300 text-gray-600 hover:text-gray-800 shadow-none'
 					}
 				>
 					<a href="/pacient">Pacient</a>
@@ -29,8 +29,8 @@ export default function Header() {
 					variant="default"
 					className={
 						pathname === '/doctor'
-							? 'bg-blue-500 hover:bg-blue-600 text-white'
-							: 'bg-white hover:bg-slate-300 text-gray-600 hover:text-gray-800 shadow-none'
+							? 'text-white'
+							: 'bg-transparent hover:bg-slate-300 text-gray-600 hover:text-gray-800 shadow-none'
 					}
 				>
 					<a href="/doctor">Doctor</a>
