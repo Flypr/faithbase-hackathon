@@ -7,7 +7,7 @@ CREATE TABLE Doctors (
     Specialty TEXT,
     Phone TEXT,
     Email TEXT,
-    License_number TEXT UNIQUE NOT NULL,
+    License_number TEXT NOT NULL,
     Hospital_affiliation TEXT,
     Address TEXT,
     Description TEXT,

@@ -11,7 +11,7 @@ CREATE TABLE Patients (
     Blood_group TEXT,
     Phone TEXT,
     Email TEXT,
-    Symptoms_descriprtion TEXT,
+    Symptoms_description TEXT,
     Patient_fo_number INTEGER,
     Last_ai_model_response TEXT NOT NULL,
     Address TEXT NOT NULL

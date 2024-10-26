@@ -1,5 +1,3 @@
-//TODO: Add data for doctors schema -> use the function from dbFunctions.js
-//TODO : Add data for patients schema -> use the function from dbFunctions.js
 import db from "./src/utils/dbFunctions.js";
 
 
@@ -17,7 +15,7 @@ const patientsData = [
       Blood_group: "A",
       Phone: "+11234567890",
       Email: "john.doe@example.com",
-      Symptoms_descriprtion: "Mild headache",
+      Symptoms_description: "Mild headache",
       Patient_fo_number: 1001,
       Last_ai_model_response: "No issues detected",
       Address: "123 Main St"
@@ -59,7 +57,7 @@ const patientsData = [
       Blood_group: "O",
       Phone: "+19876543210",
       Email: "jane.smith@example.com",
-      Symptoms_descriprtion: "Cough and cold",
+      Symptoms_description: "Cough and cold",
       Patient_fo_number: 1002,
       Last_ai_model_response: "Suggesting rest and fluids",
       Address: "456 Elm St"
@@ -101,7 +99,7 @@ const patientsData = [
       Blood_group: "B",
       Phone: "+11234987654",
       Email: "michael.brown@example.com",
-      Symptoms_descriprtion: "Fatigue",
+      Symptoms_description: "Fatigue",
       Patient_fo_number: 1003,
       Last_ai_model_response: "No major issues",
       Address: "789 Pine St"
@@ -143,7 +141,7 @@ const patientsData = [
       Blood_group: "A",
       Phone: "+11234560001",
       Email: "emma.wilson@example.com",
-      Symptoms_descriprtion: "Chronic back pain",
+      Symptoms_description: "Chronic back pain",
       Patient_fo_number: 1004,
       Last_ai_model_response: "Suggested physical therapy",
       Address: "123 Oak St"
@@ -168,7 +166,7 @@ const patientsData = [
       Test_result: "Normal",
       Lab_recomandation: "Routine follow-up"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-07-12",
       Doctor_name: "Dr. Phillips",
       Treatment: "Physical therapy twice weekly"
@@ -185,7 +183,7 @@ const patientsData = [
       Blood_group: "B",
       Phone: "+11234560002",
       Email: "lucas.anderson@example.com",
-      Symptoms_descriprtion: "Frequent urination",
+      Symptoms_description: "Frequent urination",
       Patient_fo_number: 1005,
       Last_ai_model_response: "Diabetes screening",
       Address: "456 Cedar St"
@@ -210,7 +208,7 @@ const patientsData = [
       Test_result: "7.0%",
       Lab_recomandation: "Regular monitoring required"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-08-02",
       Doctor_name: "Dr. Carter",
       Treatment: "Diet and exercise, Metformin"
@@ -227,7 +225,7 @@ const patientsData = [
       Blood_group: "O",
       Phone: "+11234560003",
       Email: "olivia.thomas@example.com",
-      Symptoms_descriprtion: "Fatigue and dizziness",
+      Symptoms_description: "Fatigue and dizziness",
       Patient_fo_number: 1006,
       Last_ai_model_response: "Suggesting iron supplements",
       Address: "789 Maple St"
@@ -252,7 +250,7 @@ const patientsData = [
       Test_result: "Low",
       Lab_recomandation: "Iron supplementation"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-09-07",
       Doctor_name: "Dr. Evans",
       Treatment: "Iron supplements daily"
@@ -269,7 +267,7 @@ const patientsData = [
       Blood_group: "AB",
       Phone: "+11234560004",
       Email: "james.martinez@example.com",
-      Symptoms_descriprtion: "Persistent knee pain",
+      Symptoms_description: "Persistent knee pain",
       Patient_fo_number: 1007,
       Last_ai_model_response: "Recommended MRI",
       Address: "101 Pine St"
@@ -294,7 +292,7 @@ const patientsData = [
       Test_result: "Signs of degeneration",
       Lab_recomandation: "Follow-up for pain management"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-09-17",
       Doctor_name: "Dr. Reed",
       Treatment: "Physical therapy and acetaminophen"
@@ -311,7 +309,7 @@ const patientsData = [
       Blood_group: "A",
       Phone: "+11234560005",
       Email: "sophia.garcia@example.com",
-      Symptoms_descriprtion: "Shortness of breath",
+      Symptoms_description: "Shortness of breath",
       Patient_fo_number: 1008,
       Last_ai_model_response: "EKG suggested",
       Address: "202 Birch St"
@@ -336,7 +334,7 @@ const patientsData = [
       Test_result: "Reduced capacity",
       Lab_recomandation: "Regular inhaler use recommended"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-09-22",
       Doctor_name: "Dr. Baker",
       Treatment: "Inhaler usage as needed"
@@ -353,7 +351,7 @@ const patientsData = [
       Blood_group: "O",
       Phone: "+11234560006",
       Email: "liam.johnson@example.com",
-      Symptoms_descriprtion: "Occasional chest pain",
+      Symptoms_description: "Occasional chest pain",
       Patient_fo_number: 1009,
       Last_ai_model_response: "Possible angina",
       Address: "303 Cedar St"
@@ -378,7 +376,7 @@ const patientsData = [
       Test_result: "Elevated LDL",
       Lab_recomandation: "Diet modification advised"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-10-02",
       Doctor_name: "Dr. Clark",
       Treatment: "Medication and lifestyle changes"
@@ -396,7 +394,7 @@ const patientsData = [
       Blood_group: "B",
       Phone: "+11234560007",
       Email: "mason.harris@example.com",
-      Symptoms_descriprtion: "Lower back pain",
+      Symptoms_description: "Lower back pain",
       Patient_fo_number: 1010,
       Last_ai_model_response: "Physical therapy suggested",
       Address: "404 Oak St"
@@ -421,7 +419,7 @@ const patientsData = [
       Test_result: "Normal",
       Lab_recomandation: "Continue with PT"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-10-06",
       Doctor_name: "Dr. Miller",
       Treatment: "Weekly PT sessions"
@@ -439,7 +437,7 @@ const patientsData = [
       Blood_group: "A",
       Phone: "+11234560008",
       Email: "ava.scott@example.com",
-      Symptoms_descriprtion: "Frequent migraines",
+      Symptoms_description: "Frequent migraines",
       Patient_fo_number: 1011,
       Last_ai_model_response: "Suggesting neurologist consult",
       Address: "505 Maple St"
@@ -464,7 +462,7 @@ const patientsData = [
       Test_result: "Normal",
       Lab_recomandation: "Medication adjustment"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-10-10",
       Doctor_name: "Dr. Parker",
       Treatment: "Medication adjustment"
@@ -482,7 +480,7 @@ const patientsData = [
       Blood_group: "AB",
       Phone: "+11234560009",
       Email: "charlotte.davis@example.com",
-      Symptoms_descriprtion: "Chronic joint pain",
+      Symptoms_description: "Chronic joint pain",
       Patient_fo_number: 1012,
       Last_ai_model_response: "RA suggested",
       Address: "606 Birch St"
@@ -507,7 +505,7 @@ const patientsData = [
       Test_result: "Elevated",
       Lab_recomandation: "Medication adherence"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-10-14",
       Doctor_name: "Dr. Nelson",
       Treatment: "Weekly injection"
@@ -525,7 +523,7 @@ const patientsData = [
       Blood_group: "B",
       Phone: "+11234560010",
       Email: "amelia.brown@example.com",
-      Symptoms_descriprtion: "Fatigue and palpitations",
+      Symptoms_description: "Fatigue and palpitations",
       Patient_fo_number: 1013,
       Last_ai_model_response: "Thyroid function test",
       Address: "707 Pine St"
@@ -550,7 +548,7 @@ const patientsData = [
       Test_result: "Low T3",
       Lab_recomandation: "Monitor and adjust dose"
     },
-    Tratament_plans: {
+    Treatment_plans: {
       Date_of_treatment: "2023-10-18",
       Doctor_name: "Dr. Simmons",
       Treatment: "Dose adjustment"
@@ -702,6 +700,6 @@ const addDoctorsIntoDatabase = async (dataToInsert) => {
   }
 }
 
-//addDataIntoDatabase(patientsData);
-//addDoctorsIntoDatabase(doctorsData);
+addDataIntoDatabase(patientsData);
+addDoctorsIntoDatabase(doctorsData);
 
