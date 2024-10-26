@@ -13,8 +13,8 @@ CREATE TABLE Patients (
     Email TEXT,
     Symptoms_descriprtion TEXT,
     Patient_fo_number INTEGER,
-    Last_ai_model_response TEXT,
-    Address TEXT
+    Last_ai_model_response TEXT NOT NULL,
+    Address TEXT NOT NULL
 );
 
 
