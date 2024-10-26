@@ -11,7 +11,7 @@ import {
 	AccordionTrigger,
 } from '@/components/ui/accordion';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, Check, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Check, X } from 'lucide-react';
 
 const users = [
 	{
@@ -129,7 +129,20 @@ export default function MainDashboard() {
 								<p className="text-sm text-gray-500">ID: {selectedUser.id}</p>
 							</div>
 						</div>
-						<p className="text-sm mb-4">Message: {selectedUser.message}</p>
+						<Card className="rounded-md shadow-none my-2">
+							<CardContent className="p-4 space-y-4">
+								<p className="font-medium">Message: {selectedUser.message}</p>
+								<div className="flex space-x-2">
+									<Button
+										variant="outline"
+										className="flex-1"
+									>
+										Not Urgent
+									</Button>
+									<Button className="flex-1">Schedule Appointment</Button>
+								</div>
+							</CardContent>
+						</Card>
 						<ScrollArea className="h-[200px]">
 							<Accordion
 								type="single"
@@ -153,6 +166,14 @@ export default function MainDashboard() {
 											<li>Lisinopril 10mg daily</li>
 											<li>Metformin 500mg twice daily</li>
 											<li>Aspirin 81mg daily</li>
+										</ul>
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="allergies">
+									<AccordionTrigger>Allergies</AccordionTrigger>
+									<AccordionContent>
+										<ul className="list-disc list-inside">
+											<li>Penicillin</li>
 										</ul>
 									</AccordionContent>
 								</AccordionItem>
@@ -224,9 +245,11 @@ export default function MainDashboard() {
 
 				<Card className="col-span-4">
 					<CardHeader>
-						<CardTitle>Appointment with Specialist</CardTitle>
+						<CardTitle className="text-center">
+							Appointment with Specialist
+						</CardTitle>
 					</CardHeader>
-					<CardContent className="flex flex-col items-start">
+					<CardContent className="flex flex-col items-center">
 						<Calendar
 							mode="single"
 							selected={date}
