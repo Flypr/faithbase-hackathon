@@ -24,4 +24,68 @@ const getAllPacientInfo = async (id) => {
   throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
 }
 
-export default { getPacients, getAllPacientInfo };
+// Data is an object data{Patient{}, Medical_history{}, Medications{}, Vital_signs{}, Lab_results{}, Tratament_plans{}
+const addPacientAllData = async (data) => {
+  try {
+    const db = await dbPromise;
+    const pacient = await db.run("INSERT INTO Patients (First_name, Personal_numeric_number, Last_name, Date_of_birth, Gender, Age, Blood_group, Phone, Email, Symptoms_descriprtion, Patient_fo_number, Last_ai_model_response, Address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", data.Patient.First_name, data.Patient.Personal_numeric_number, data.Patient.Last_name, data.Patient.Date_of_birth, data.Patient.Gender, data.Patient.Age, data.Patient.Blood_group, data.Patient.Phone, data.Patient.Email, data.Patient.Symptoms_descriprtion, data.Patient.Last_ai_model_response, data.Patient.Adress);
+    const medical_history = await db.run("Insert INTO Medical_history (Patient_id, Diagnosis, Examination, Examination_date) VALUES (?,?,?,?);", pacient.lastID, data.Medical_history.Diagnosis, data.Medical_history.Examination, data.Medical_history.Examination_date);
+
+    /*
+        const medications = "";
+        const vital_signs = "";
+        const lab_results = "";
+        const tratament_plans = "";
+    */
+    return "";
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+const updatePatientSymptoms = async (id, symptoms) => {
+  try {
+    const db = await dbPromise;
+    const patient = await db.run("UPDATE Patients SET Symptoms_descriprtion = ? WHERE Patient_id = ?;", symptoms, id);
+    return patient;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+const updatePatientAiModelResponse = async (id, aiModelResponse) => {
+  try {
+    const db = await dbPromise;
+    const patient = await db.run("UPDATE Patients SET Last_ai_model_response = ? WHERE Patient_id = ?;", aiModelResponse, id);
+    return patient;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+const getDoctors = async () => {
+  try {
+    const db = await dbPromise;
+    const doctors = await db.all("SELECT * FROM Doctors;");
+    return doctors;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+const getDoctorInfo = async (id) => {
+  try {
+    const db = await dbPromise;
+    const doctor = await db.all("SELECT * FROM Doctors WHERE Doctor_id = ?;", id);
+    return doctor;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+export default { updatePatientSymptoms, updatePatientAiModelResponse, getPacients, getAllPacientInfo, getDoctors, getDoctorInfo, addPacientAllData };
