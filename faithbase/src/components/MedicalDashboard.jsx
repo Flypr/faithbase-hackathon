@@ -12,8 +12,8 @@ export default function MedicalDashboard() {
 	];
 
 	const medications = [
-		{ name: 'Paracetamol', dosage: '2 pills', frequency: '3 times a day' },
-		{ name: 'Paracetamol', dosage: '2 pills', frequency: '3 times a day' },
+		{ name: 'Lisinopril', dosage: '10 mg', frequency: 'once daily' },
+		{ name: 'Albuterol', dosage: '90 mcg', frequency: 'as needed' },
 	];
 
 	return (

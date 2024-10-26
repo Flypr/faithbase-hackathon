@@ -26,7 +26,7 @@ export default function UserInfo() {
 						<AvatarFallback>JD</AvatarFallback>
 					</Avatar>
 					<div>
-						<CardTitle>Jane Doe</CardTitle>
+						<CardTitle>John Doe</CardTitle>
 						<div className="flex items-center text-sm text-muted-foreground mt-1">
 							<User className="mr-1 h-4 w-4" />
 							<span>Patient ID: 12345</span>
