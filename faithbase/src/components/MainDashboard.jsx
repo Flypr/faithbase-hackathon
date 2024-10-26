@@ -67,6 +67,7 @@ export default function MainDashboard() {
 			>
 				<path d="M0 0H358.997C381.17 0 399.223 17.8282 399.5 40V40C399.777 62.1718 417.83 80 440.003 80H592H760C782.091 80 800 62.0914 800 40V40C800 17.9086 817.909 0 840 0H1200V80H0V0Z" />
 			</svg>
+
 			<div className="absolute top-4 left-1/2 -translate-x-1/2 flex justify-center items-center space-x-4 py-4">
 				<Button
 					variant="ghost"
@@ -104,7 +105,7 @@ export default function MainDashboard() {
 				</Button>
 			</div>
 
-			<div className="grid grid-cols-12 gap-4 px-4 bg-white bg-opacity-65 backdrop-blur-md pt-8 pb-4">
+			<div className="grid grid-cols-12 gap-4 pt-8 pb-4 bg-white bg-opacity-65 backdrop-blur-md px-4">
 				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Patient</CardTitle>

@@ -6,14 +6,16 @@ import DoctorRecommendationsCard from './components/DoctorRecomendationsCard';
 
 function DoctorApp() {
 	return (
-		<main className="px-12">
+		<main>
 			<Header />
 			<MainDashboard />
-			<div className="grid grid-cols-12 gap-4">
-				<DoctorRecommendationsCard role="Doctor" />
-				<UserInfo />
+			<div className="bg-white bg-opacity-65 backdrop-blur-md px-4">
+				<div className="grid grid-cols-12 gap-4">
+					<DoctorRecommendationsCard role="Doctor" />
+					<UserInfo />
+				</div>
+				<Footer />
 			</div>
-			<Footer />
 		</main>
 	);
 }

@@ -39,7 +39,7 @@ export default function UserInfo() {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<div className="space-y-2 mb-4">
+				<div className="space-y-2 mb-6">
 					<div className="flex items-center text-sm">
 						<Phone className="mr-2 h-4 w-4 text-muted-foreground" />
 						<span>(555) 123-4567</span>
@@ -49,7 +49,7 @@ export default function UserInfo() {
 						<span>123 Medical St, Health City, HC 12345</span>
 					</div>
 				</div>
-				<ScrollArea className="h-[400px] pr-4">
+				<ScrollArea className="h-[300px] pr-4">
 					<div className="space-y-6">
 						<div>
 							<h3 className="font-semibold flex items-center mb-2">
