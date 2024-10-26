@@ -4,9 +4,9 @@ import DoctorRecomendationsCard from './components/DoctorRecomendationsCard';
 
 function App() {
 	return (
-		<main className="px-12 h-screen">
+		<main className="px-12">
 			<Header />
-			<div className="flex gap-6">
+			<div className="grid grid-cols-12 gap-6">
 				<UserInfo />
 				<DoctorRecomendationsCard />
 			</div>

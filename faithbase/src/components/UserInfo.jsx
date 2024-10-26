@@ -15,7 +15,7 @@ import {
 
 export default function UserInfo() {
 	return (
-		<Card className="w-full max-w-md mx-auto">
+		<Card className="w-full mx-auto col-span-4">
 			<CardHeader className="pb-4">
 				<div className="flex items-center space-x-4">
 					<Avatar className="w-16 h-16">
@@ -49,7 +49,7 @@ export default function UserInfo() {
 						<span>123 Medical St, Health City, HC 12345</span>
 					</div>
 				</div>
-				<ScrollArea className="h-[300px] pr-4">
+				<ScrollArea className="h-[400px] pr-4">
 					<div className="space-y-6">
 						<div>
 							<h3 className="font-semibold flex items-center mb-2">

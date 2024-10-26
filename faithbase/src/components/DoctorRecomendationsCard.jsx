@@ -65,7 +65,7 @@ export default function DoctorRecommendationsCard() {
 	};
 
 	return (
-		<Card className="w-full max-w-2xl mx-auto">
+		<Card className="w-full mx-auto col-span-8">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Stethoscope className="h-6 w-6 text-primary" />
