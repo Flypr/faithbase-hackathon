@@ -1,6 +1,8 @@
 import Header from './components/Header';
 import UserInfo from './components/UserInfo';
 import DoctorRecomendationsCard from './components/DoctorRecomendationsCard';
+import Footer from './components/Footer';
+import MedicalDashboard from './components/MedicalDashboard';
 
 function App() {
 	return (
@@ -10,6 +12,8 @@ function App() {
 				<UserInfo />
 				<DoctorRecomendationsCard />
 			</div>
+			<MedicalDashboard />
+			<Footer />
 		</main>
 	);
 }
