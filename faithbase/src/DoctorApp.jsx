@@ -4,7 +4,7 @@ import MainDashboard from './components/MainDashboard';
 
 function DoctorApp() {
 	return (
-		<main className="px-12">
+		<main>
 			<Header />
 			<MainDashboard />
 			<Footer />

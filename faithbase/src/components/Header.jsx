@@ -7,7 +7,7 @@ export default function Header() {
 	const { pathname } = location;
 
 	return (
-		<header className="py-4 pt-8 flex items-center justify-between pb-10">
+		<header className="p-4 pt-8 flex items-center justify-between pb-10">
 			<div className="flex items-center space-x-2">
 				<img
 					src={Logo}
