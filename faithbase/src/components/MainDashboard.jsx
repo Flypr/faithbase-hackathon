@@ -11,35 +11,38 @@ import {
 	AccordionTrigger,
 } from '@/components/ui/accordion';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, ChevronDown, Check, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Check, X } from 'lucide-react';
 
 const users = [
 	{
-		id: 1,
+		id: 1234,
 		name: 'John Doe',
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'My head hurts',
+		notification: true,
 	},
 	{
-		id: 2,
+		id: 2345,
 		name: 'Jane Smith',
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'Feeling dizzy',
+		notification: true,
 	},
 	{
-		id: 3,
+		id: 3456,
 		name: 'Bob Johnson',
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'Sore throat',
+		notification: true,
 	},
 	{
-		id: 4,
+		id: 4567,
 		name: 'Alice Brown',
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'Back pain',
 	},
 	{
-		id: 5,
+		id: 5678,
 		name: 'Jane Doe',
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'My head hurts',
@@ -76,26 +79,33 @@ export default function MainDashboard() {
 					<ChevronLeft className="h-6 w-6" />
 				</Button>
 				{users.map((user) => (
-					<Avatar
+					<div
 						key={user.id}
-						className={`h-14 w-14 cursor-pointer transition-all ${
-							selectedUser.id === user.id
-								? 'ring-2 ring-primary ring-offset-2'
-								: ''
-						}`}
-						onClick={() => setSelectedUser(user)}
+						className="relative"
 					>
-						<AvatarImage
-							src={user.avatar}
-							alt={user.name}
-						/>
-						<AvatarFallback>
-							{user.name
-								.split(' ')
-								.map((n) => n[0])
-								.join('')}
-						</AvatarFallback>
-					</Avatar>
+						<Avatar
+							className={`h-14 w-14 cursor-pointer transition-all ${
+								selectedUser.id === user.id
+									? 'ring-2 ring-primary ring-offset-2'
+									: ''
+							}`}
+							onClick={() => setSelectedUser(user)}
+						>
+							<AvatarImage
+								src={user.avatar}
+								alt={user.name}
+							/>
+							<AvatarFallback>
+								{user.name
+									.split(' ')
+									.map((n) => n[0])
+									.join('')}
+							</AvatarFallback>
+						</Avatar>
+						{user.notification && (
+							<div className="absolute -bottom-0 -right-0 w-4 h-4 bg-red-500 rounded-full z-10" />
+						)}
+					</div>
 				))}
 				<Button
 					variant="ghost"
