@@ -1,18 +1,14 @@
 import express from "express";
-import cors from "cors";
-
+import patientsRouter from "./controllers/patients.js";
+import doctorRouter from "./controllers/doctors.js"
 
 const app = express();
 app.disable("x-powered-by");
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173"];
-const options = {
-  origin: allowedOrigins,
-  credentials: true
-}
-app.use(cors(options));
 app.set("trust proxy", 1);
 
+app.use("/patients", patientsRouter);
+app.use("/doctors", doctorRouter);
 
 export default app;
