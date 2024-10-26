@@ -77,3 +77,8 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+main {
+	background: url('/src/assets/bg-gradient.png');
+	background-size: cover;
+}

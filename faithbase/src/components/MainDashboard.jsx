@@ -53,7 +53,7 @@ export default function MainDashboard() {
 	const [date, setDate] = useState(new Date());
 
 	return (
-		<div className="container mx-auto p-4">
+		<div className="mx-auto py-4">
 			<div className="flex justify-center items-center space-x-4 mb-8">
 				<Button
 					variant="ghost"
@@ -91,8 +91,8 @@ export default function MainDashboard() {
 				</Button>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<Card>
+			<div className="grid grid-cols-12 gap-4">
+				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Patient</CardTitle>
 					</CardHeader>
@@ -147,7 +147,7 @@ export default function MainDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card>
+				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Suggested Specialists</CardTitle>
 					</CardHeader>
@@ -162,7 +162,7 @@ export default function MainDashboard() {
 									className="flex items-center justify-between space-x-2 mb-4"
 								>
 									<div className="flex items-center space-x-2">
-										<Avatar className="h-8 w-8">
+										<Avatar className="h-12 w-12">
 											<AvatarFallback>
 												{specialist.name
 													.split(' ')
@@ -208,11 +208,11 @@ export default function MainDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card>
+				<Card className="col-span-4 w-max">
 					<CardHeader>
 						<CardTitle>Appointment with Specialist</CardTitle>
 					</CardHeader>
-					<CardContent>
+					<CardContent className="flex flex-col items-start">
 						<Calendar
 							mode="single"
 							selected={date}
