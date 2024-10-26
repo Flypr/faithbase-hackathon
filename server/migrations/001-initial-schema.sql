@@ -3,6 +3,7 @@
 CREATE TABLE Patients (
     Patient_id INTEGER PRIMARY KEY,
     First_name TEXT NOT NULL,
+<<<<<<< HEAD
     Personal_numeric_number INTEGER NOT NULL,
     Last_name TEXT NOT NULL,
     Date_of_birth TEXT NOT NULL,
@@ -24,12 +25,25 @@ CREATE TABLE Ai_model_responses (
     FOREIGN KEY (Patient_id) REFERENCES Patients (Patient_id)
 );
 
+=======
+    Last_name TEXT NOT NULL,
+    Date_of_birth TEXT NOT NULL,
+    Gender TEXT,
+    Phone TEXT,
+    Email TEXT,
+    Address TEXT
+);
+
+>>>>>>> a54fabdd4de1cb7ba8b7619580e5f5ee62d6bb0e
 CREATE TABLE Medical_history (
     Medical_history_id INTEGER PRIMARY KEY,
     Patient_id INTEGER NOT NULL,
     Diagnosis TEXT NOT NULL,
+<<<<<<< HEAD
     Examination TEXT NOT NULL,
     Examination_date TEXT NOT NULL,
+=======
+>>>>>>> a54fabdd4de1cb7ba8b7619580e5f5ee62d6bb0e
     FOREIGN KEY (Patient_id) REFERENCES Patients (Patient_id)
 );
 
@@ -56,7 +70,19 @@ CREATE TABLE Lab_results (
     Date_of_test TEXT NOT NULL,
     Test_name TEXT NOT NULL,
     Test_result TEXT NOT NULL,
+<<<<<<< HEAD
     Lab_recomandation TEXT NOT NULL,
+=======
+    FOREIGN KEY (Patient_id) REFERENCES Patients (Patient_id)
+);
+
+CREATE TABLE Treatment_plans (
+    Treatment_plan_id INTEGER PRIMARY KEY,
+    Patient_id INTEGER NOT NULL,
+    Date_of_treatment TEXT NOT NULL,
+    Doctor_name TEXT NOT NULL,
+    Treatment TEXT NOT NULL,
+>>>>>>> a54fabdd4de1cb7ba8b7619580e5f5ee62d6bb0e
     FOREIGN KEY (Patient_id) REFERENCES Patients (Patient_id)
 );
 
@@ -67,3 +93,8 @@ DROP TABLE Medical_history;
 DROP TABLE Medications;
 DROP TABLE Vital_signs;
 DROP TABLE Lab_results;
+<<<<<<< HEAD
+=======
+DROP TABLE Treatment_plans;
+DROP TABLE Notes;
+>>>>>>> a54fabdd4de1cb7ba8b7619580e5f5ee62d6bb0e
