@@ -8,7 +8,7 @@ function App() {
 	return (
 		<main className="px-12">
 			<Header />
-			<div className="grid grid-cols-12 gap-6">
+			<div className="grid grid-cols-12 gap-4">
 				<UserInfo />
 				<DoctorRecomendationsCard />
 			</div>
