@@ -32,6 +32,7 @@ const getAllPacientInfo = async (id) => {
 const addPacientAllData = async (data) => {
   try {
     const db = await dbPromise;
+<<<<<<< HEAD
     const patient = await db.run("INSERT INTO Patients (First_name, Personal_numeric_number, Last_name, Date_of_birth, Gender, Age, Blood_group, Phone, Email, Symptoms_descriprtion, Patient_fo_number, Last_ai_model_response, Address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", data.Patient.First_name, data.Patient.Personal_numeric_number, data.Patient.Last_name, data.Patient.Date_of_birth, data.Patient.Gender, data.Patient.Age, data.Patient.Blood_group, data.Patient.Phone, data.Patient.Email, data.Patient.Symptoms_descriprtion, data.Patient.Patient_fo_number, data.Patient.Last_ai_model_response, data.Patient.Address);
     const medical_history = await db.run("Insert INTO Medical_history (Patient_id, Diagnosis, Examination, Examination_date) VALUES (?,?,?,?);", patient.lastID, data.Medical_history.Diagnosis, data.Medical_history.Examination, data.Medical_history.Examination_date);
     const medications = await db.run("INSERT INTO Medications (Patient_id, Medication) VALUES (?,?);", patient.lastID, data.Medications.Medication);
@@ -45,12 +46,29 @@ const addPacientAllData = async (data) => {
   } catch (error) {
     throw new AppError("Database error", 500, error, true);
   }
+=======
+    const pacient = await db.run("INSERT INTO Patients (First_name, Personal_numeric_number, Last_name, Date_of_birth, Gender, Age, Blood_group, Phone, Email, Symptoms_descriprtion, Patient_fo_number, Last_ai_model_response, Address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", data.Patient.First_name, data.Patient.Personal_numeric_number, data.Patient.Last_name, data.Patient.Date_of_birth, data.Patient.Gender, data.Patient.Age, data.Patient.Blood_group, data.Patient.Phone, data.Patient.Email, data.Patient.Symptoms_descriprtion, data.Patient.Last_ai_model_response, data.Patient.Adress);
+    const medical_history = await db.run("Insert INTO Medical_history (Patient_id, Diagnosis, Examination, Examination_date) VALUES (?,?,?,?);", pacient.lastID, data.Medical_history.Diagnosis, data.Medical_history.Examination, data.Medical_history.Examination_date);
+
+    /*
+        const medications = "";
+        const vital_signs = "";
+        const lab_results = "";
+        const tratament_plans = "";
+    */
+    return "";
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+>>>>>>> 0d1e42144051fd747ac739354d9ff33f2f76a177
 }
 
 const updatePatientSymptoms = async (id, symptoms) => {
   try {
     const db = await dbPromise;
     const patient = await db.run("UPDATE Patients SET Symptoms_descriprtion = ? WHERE Patient_id = ?;", symptoms, id);
+<<<<<<< HEAD
     if (!patient) {
       throw new AppError("Update failed", 404);
     }
@@ -58,12 +76,20 @@ const updatePatientSymptoms = async (id, symptoms) => {
   } catch (error) {
     throw new AppError("Database error", 500, error, true);
   }
+=======
+    return patient;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+>>>>>>> 0d1e42144051fd747ac739354d9ff33f2f76a177
 }
 
 const updatePatientAiModelResponse = async (id, aiModelResponse) => {
   try {
     const db = await dbPromise;
     const patient = await db.run("UPDATE Patients SET Last_ai_model_response = ? WHERE Patient_id = ?;", aiModelResponse, id);
+<<<<<<< HEAD
     if (!patient) {
       throw new AppError("Update failed", 404);
     }
@@ -71,12 +97,20 @@ const updatePatientAiModelResponse = async (id, aiModelResponse) => {
   } catch (error) {
     throw new AppError("Database error", 500, error, true);
   }
+=======
+    return patient;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+>>>>>>> 0d1e42144051fd747ac739354d9ff33f2f76a177
 }
 
 const getDoctors = async () => {
   try {
     const db = await dbPromise;
     const doctors = await db.all("SELECT * FROM Doctors;");
+<<<<<<< HEAD
     if (!doctors) {
       throw new AppError("Get doctors failed", 404);
     }
@@ -97,11 +131,19 @@ const addDoctor = async (data) => {
   } catch (error) {
     throw new AppError("Database error", 500, error, true);
   }
+=======
+    return doctors;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+>>>>>>> 0d1e42144051fd747ac739354d9ff33f2f76a177
 }
 
 const getDoctorInfo = async (id) => {
   try {
     const db = await dbPromise;
+<<<<<<< HEAD
     const doctor = await db.get("SELECT * FROM Doctors WHERE Doctor_id = ?;", id);
     if (!doctor) {
       throw new AppError("Get doctor failed", 404);
@@ -113,3 +155,14 @@ const getDoctorInfo = async (id) => {
 }
 
 export default { addDoctor, updatePatientSymptoms, updatePatientAiModelResponse, getPacients, getAllPacientInfo, getDoctors, getDoctorInfo, addPacientAllData };
+=======
+    const doctor = await db.all("SELECT * FROM Doctors WHERE Doctor_id = ?;", id);
+    return doctor;
+  } catch (error) {
+    console.log(error);
+  }
+  throw new AppError("Database error", 500, "There is an issue with the database dbPromise constructor", true);
+}
+
+export default { updatePatientSymptoms, updatePatientAiModelResponse, getPacients, getAllPacientInfo, getDoctors, getDoctorInfo, addPacientAllData };
+>>>>>>> 0d1e42144051fd747ac739354d9ff33f2f76a177
