@@ -9,6 +9,7 @@ export default function AppRoutes() {
         <Route path="/" element={<PacientApp />} />
         <Route path="/pacient" element={<PacientApp />} />
         <Route path="/doctor" element={<DoctorApp />} />
+        <Route path="*" element={<PacientApp />} />
       </Routes>
     </BrowserRouter>
   );
