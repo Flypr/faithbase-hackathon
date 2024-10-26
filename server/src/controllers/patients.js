@@ -3,6 +3,8 @@ import db from "../utils/dbFunctions.js";
 import { AppError } from "../middleware/errorHandler.js";
 const patientsRouter = Router();
 
+const ai_module = "http://127.0.0.1:8000/analyze";
+
 patientsRouter.get("/allPatients", async (_req, res) => {
   try {
     const patiens = await db.getPatients();
@@ -29,10 +31,29 @@ patientsRouter.post("/patient/updateSymptoms/:id", async (req, res) => {
     if (!symptoms) {
       throw new AppError("Missing required fields", 400);
     }
-    const patient = await db.updatePatientSymptoms(req.params.id, symptoms);
-    if (!patient) {
+
+    const response = await db.updatePatientSymptoms(req.params.id, symptoms);
+    if (!response) {
       throw new AppError("Update failed", 404);
     }
+
+    const patient = await db.getAllPacientInfo(req.params.id);
+    if (!patient) {
+      throw new AppError("Get patient failed", 404);
+    }
+
+    //Call AI module
+
+    const ai_promt = fetch(ai_module, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ patient }),
+    });
+
+    //
+
     res.status(200).json({ message: "Symptoms updated successfully", });
   } catch (error) {
     res.status(500).json({ error: error.message });
