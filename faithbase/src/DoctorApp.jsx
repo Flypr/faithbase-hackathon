@@ -1,13 +1,15 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import MainDashboard from './components/MainDashboard';
 
-function App() {
-  return (
-    <main className="px-12">
-      <Header />
-      <Footer />
-    </main>
-  );
+function DoctorApp() {
+	return (
+		<main className="px-12">
+			<Header />
+			<MainDashboard />
+			<Footer />
+		</main>
+	);
 }
 
-export default App;
+export default DoctorApp;

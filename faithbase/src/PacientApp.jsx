@@ -4,7 +4,7 @@ import DoctorRecomendationsCard from './components/DoctorRecomendationsCard';
 import Footer from './components/Footer';
 import MedicalDashboard from './components/MedicalDashboard';
 
-function App() {
+function PacientApp() {
 	return (
 		<main className="px-12">
 			<Header />
@@ -18,4 +18,4 @@ function App() {
 	);
 }
 
-export default App;
+export default PacientApp;
