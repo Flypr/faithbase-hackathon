@@ -212,12 +212,12 @@ export default function MainDashboard() {
 					<CardHeader>
 						<CardTitle>Appointment with Specialist</CardTitle>
 					</CardHeader>
-					<CardContent>
+					<CardContent className="flex flex-col items-start">
 						<Calendar
 							mode="single"
 							selected={date}
 							onSelect={setDate}
-							className="rounded-md border"
+							className="rounded-md border w-max"
 						/>
 						{selectedSpecialist && (
 							<p className="mt-4 text-center text-sm text-gray-500">
