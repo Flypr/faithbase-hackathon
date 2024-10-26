@@ -12,12 +12,12 @@ export default function MedicalDashboard() {
 	];
 
 	const medications = [
-		{ name: 'Paracetamol', dosage: '2 pills', frequency: '3 times a day' },
-		{ name: 'Paracetamol', dosage: '2 pills', frequency: '3 times a day' },
+		{ name: 'Lisinopril', dosage: '10 mg', frequency: 'once daily' },
+		{ name: 'Albuterol', dosage: '90 mcg', frequency: 'as needed' },
 	];
 
 	return (
-		<div className="mx-auto py-4">
+		<div className="mx-auto mt-4">
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 				<Card className="bg-white border border-gray-200">
 					<CardHeader>

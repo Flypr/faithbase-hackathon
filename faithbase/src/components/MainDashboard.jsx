@@ -38,6 +38,12 @@ const users = [
 		avatar: '/placeholder.svg?height=50&width=50',
 		message: 'Back pain',
 	},
+	{
+		id: 5,
+		name: 'Jane Doe',
+		avatar: '/placeholder.svg?height=50&width=50',
+		message: 'My head hurts',
+	},
 ];
 
 const specialists = [
@@ -53,8 +59,16 @@ export default function MainDashboard() {
 	const [date, setDate] = useState(new Date());
 
 	return (
-		<div className="container mx-auto p-4">
-			<div className="flex justify-center items-center space-x-4 mb-8">
+		<div className="mx-auto relative">
+			<svg
+				viewBox="0 0 1200 80"
+				fill="none"
+				className="w-full h-auto fill-white opacity-65 backdrop-blur-xl"
+			>
+				<path d="M0 0H358.997C381.17 0 399.223 17.8282 399.5 40V40C399.777 62.1718 417.83 80 440.003 80H592H760C782.091 80 800 62.0914 800 40V40C800 17.9086 817.909 0 840 0H1200V80H0V0Z" />
+			</svg>
+
+			<div className="absolute top-4 left-1/2 -translate-x-1/2 flex justify-center items-center space-x-4 py-4">
 				<Button
 					variant="ghost"
 					size="icon"
@@ -64,7 +78,7 @@ export default function MainDashboard() {
 				{users.map((user) => (
 					<Avatar
 						key={user.id}
-						className={`h-12 w-12 cursor-pointer transition-all ${
+						className={`h-14 w-14 cursor-pointer transition-all ${
 							selectedUser.id === user.id
 								? 'ring-2 ring-primary ring-offset-2'
 								: ''
@@ -91,8 +105,8 @@ export default function MainDashboard() {
 				</Button>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<Card>
+			<div className="grid grid-cols-12 gap-4 pt-8 pb-4 bg-white bg-opacity-65 backdrop-blur-md px-4">
+				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Patient</CardTitle>
 					</CardHeader>
@@ -147,7 +161,7 @@ export default function MainDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card>
+				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Suggested Specialists</CardTitle>
 					</CardHeader>
@@ -162,7 +176,7 @@ export default function MainDashboard() {
 									className="flex items-center justify-between space-x-2 mb-4"
 								>
 									<div className="flex items-center space-x-2">
-										<Avatar className="h-8 w-8">
+										<Avatar className="h-12 w-12">
 											<AvatarFallback>
 												{specialist.name
 													.split(' ')
@@ -208,11 +222,11 @@ export default function MainDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card>
+				<Card className="col-span-4">
 					<CardHeader>
 						<CardTitle>Appointment with Specialist</CardTitle>
 					</CardHeader>
-					<CardContent>
+					<CardContent className="flex flex-col items-start">
 						<Calendar
 							mode="single"
 							selected={date}

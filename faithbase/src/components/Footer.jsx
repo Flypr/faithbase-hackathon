@@ -3,7 +3,7 @@ import Logo from '../assets/Logo.svg';
 
 export default function Footer() {
 	return (
-		<footer className="pt-4">
+		<footer className="p-4">
 			<div className="mx-auto py-12">
 				<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 					<div className="space-y-4">
