@@ -1,6 +1,6 @@
-from fastapi import FastAPI, HTTPException # type: ignore
-from pydantic import BaseModel # type: ignore
-from typing import List, Dict, Optional
+from fastapi import FastAPI, HTTPException  # type: ignore
+from pydantic import BaseModel  # type: ignore
+from typing import List, Optional, Dict
 from transformers import pipeline  # type: ignore
 
 # Define Pydantic models for request validation
@@ -9,73 +9,50 @@ class ContactInfo(BaseModel):
     email: str
     address: str
 
-class PersonalInfo(BaseModel):
+class Patient(BaseModel):
     first_name: str
     last_name: str
     date_of_birth: str
     gender: str
+    age: int
+    blood_group: str
     contact: ContactInfo
-
-class Surgery(BaseModel):
-    type: str
-    date: str
-
-class FamilyHistory(BaseModel):
-    diabetes: str
-    heart_disease: str
+    symptoms_description: str
+    patient_file_number: int
+    last_ai_model_response: str
 
 class MedicalHistory(BaseModel):
-    allergies: List[str]
-    previous_conditions: List[str]
-    surgeries: List[Surgery]
-    family_history: FamilyHistory
+    diagnosis: str
+    examination: str
+    examination_date: str
 
 class Medication(BaseModel):
-    name: str
-    dosage: Optional[str] = None
-    frequency: Optional[str] = None
-    start_date: Optional[str] = None
+    medication: str
 
 class VitalSigns(BaseModel):
-    last_update: str
-    blood_pressure: str
     heart_rate: str
-    temperature: str
-    respiratory_rate: str
+    blood_pressure: str
+    temperature: float
+    blood_sugar: int
 
 class LabResult(BaseModel):
-    test: str
-    date: str
-    results: Optional[Dict[str, str]] = None
-    findings: Optional[str] = None
-
-class PrescribedTreatment(BaseModel):
-    treatment: str
-    instructions: str
-
-class FollowUpAppointment(BaseModel):
-    date: str
-    reason: str
+    date_of_test: str
+    test_name: str
+    test_result: str
+    lab_recommendation: str
 
 class TreatmentPlan(BaseModel):
-    current_diagnosis: str
-    prescribed_treatments: List[PrescribedTreatment]
-    follow_up_appointments: List[FollowUpAppointment]
-
-class Note(BaseModel):
-    date: str
-    author: str
-    note: str
+    date_of_treatment: str
+    doctor_name: str
+    treatment: str
 
 class PatientData(BaseModel):
-    patient_id: str
-    personal_info: PersonalInfo
+    patient: Patient
     medical_history: MedicalHistory
-    medications: List[Medication]
+    medications: Medication
     vital_signs: VitalSigns
-    lab_results: List[LabResult]
-    treatment_plan: TreatmentPlan
-    notes: List[Note]
+    lab_results: LabResult
+    treatment_plans: TreatmentPlan
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -83,22 +60,22 @@ app = FastAPI()
 # Initialize NER pipeline
 ner_pipeline = pipeline("ner", model="blaze999/Medical-NER", aggregation_strategy="simple")
 
-def analyze_patient_data(patient_data, patient_message):
+def analyze_patient_data(patient_data: PatientData, patient_message: str):
     text_to_analyze = f"""
-    Patient ID: {patient_data.patient_id}
-    Name: {patient_data.personal_info.first_name} {patient_data.personal_info.last_name}
-    DOB: {patient_data.personal_info.date_of_birth}
-    Gender: {patient_data.personal_info.gender}
-    Contact: {patient_data.personal_info.contact.phone}, {patient_data.personal_info.contact.email}, {patient_data.personal_info.contact.address}
-    Allergies: {', '.join(patient_data.medical_history.allergies)}
-    Previous Conditions: {', '.join(patient_data.medical_history.previous_conditions)}
-    Surgeries: {', '.join([f"{surgery.type} on {surgery.date}" for surgery in patient_data.medical_history.surgeries])}
-    Family History: Diabetes: {patient_data.medical_history.family_history.diabetes}, Heart Disease: {patient_data.medical_history.family_history.heart_disease}
-    Current Medications: {', '.join([med.name for med in patient_data.medications])}
-    Vital Signs: Last Update: {patient_data.vital_signs.last_update}, Blood Pressure: {patient_data.vital_signs.blood_pressure}, Heart Rate: {patient_data.vital_signs.heart_rate}, Temperature: {patient_data.vital_signs.temperature}, Respiratory Rate: {patient_data.vital_signs.respiratory_rate}
-    Lab Results: {', '.join([f"{lab.test} on {lab.date} showed findings: {lab.results if lab.results else lab.findings}" for lab in patient_data.lab_results])}
-    Current Diagnosis: {patient_data.treatment_plan.current_diagnosis}
-    Notes: {', '.join([f"{note.date} by {note.author}: {note.note}" for note in patient_data.notes])}
+    Patient ID: {patient_data.patient.patient_file_number}
+    Name: {patient_data.patient.first_name} {patient_data.patient.last_name}
+    DOB: {patient_data.patient.date_of_birth}
+    Gender: {patient_data.patient.gender}
+    Age: {patient_data.patient.age}
+    Blood Group: {patient_data.patient.blood_group}
+    Contact: {patient_data.patient.contact.phone}, {patient_data.patient.contact.email}, {patient_data.patient.contact.address}
+    Symptoms: {patient_data.patient.symptoms_description}
+    Diagnosis: {patient_data.medical_history.diagnosis}
+    Examination: {patient_data.medical_history.examination} on {patient_data.medical_history.examination_date}
+    Current Medications: {patient_data.medications.medication}
+    Vital Signs: Heart Rate: {patient_data.vital_signs.heart_rate}, Blood Pressure: {patient_data.vital_signs.blood_pressure}, Temperature: {patient_data.vital_signs.temperature}, Blood Sugar: {patient_data.vital_signs.blood_sugar}
+    Lab Results: {patient_data.lab_results.test_name} on {patient_data.lab_results.date_of_test} showed: {patient_data.lab_results.test_result}. Recommendation: {patient_data.lab_results.lab_recommendation}
+    Treatment Plan: {patient_data.treatment_plans.treatment} by {patient_data.treatment_plans.doctor_name} on {patient_data.treatment_plans.date_of_treatment}.
     Additional Case: {patient_message}
     """
 
@@ -132,7 +109,7 @@ def analyze(patient_data: PatientData, patient_message: str):
     try:
         # Call the analysis function
         results = analyze_patient_data(patient_data, patient_message)
-        
+
         # Format the results nicely
         formatted_results = format_results(results)
 
@@ -143,7 +120,7 @@ def analyze(patient_data: PatientData, patient_message: str):
 def format_results(results):
     # Create a dictionary to group results by entity type
     grouped_results = {}
-    
+
     for entity in results:
         entity_group = entity['entity_group']
         if entity_group not in grouped_results:
@@ -157,6 +134,4 @@ def format_results(results):
     formatted_response = {}
     for entity_group, items in grouped_results.items():
         formatted_response[entity_group] = items
-    print(format_results)
     return formatted_response
-
