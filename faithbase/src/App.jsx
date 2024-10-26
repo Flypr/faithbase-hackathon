@@ -1,16 +1,16 @@
 import Header from './components/Header';
 import UserInfo from './components/UserInfo';
-import Chat from './components/Chat';
+import DoctorRecomendationsCard from './components/DoctorRecomendationsCard';
 
 function App() {
 	return (
-		<div className="">
+		<main className="px-12 h-screen">
 			<Header />
-			<div className="flex">
+			<div className="flex gap-6">
 				<UserInfo />
-				<Chat />
+				<DoctorRecomendationsCard />
 			</div>
-		</div>
+		</main>
 	);
 }
 
