@@ -198,6 +198,14 @@ export default function MainDashboard() {
 										[Patient&apos;s allergies here]
 									</AccordionContent>
 								</AccordionItem>
+								<AccordionItem value="allergies">
+									<AccordionTrigger>Allergies</AccordionTrigger>
+									<AccordionContent>
+										<ul className="list-disc list-inside">
+											<li>Penicillin</li>
+										</ul>
+									</AccordionContent>
+								</AccordionItem>
 							</Accordion>
 						</ScrollArea>
 					</CardContent>

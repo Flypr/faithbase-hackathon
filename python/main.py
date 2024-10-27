@@ -1,58 +1,8 @@
 from fastapi import FastAPI, HTTPException  # type: ignore
 from pydantic import BaseModel  # type: ignore
-from typing import List, Optional, Dict
+from typing import List
 from transformers import pipeline  # type: ignore
-
-# Define Pydantic models for request validation
-class ContactInfo(BaseModel):
-    phone: str
-    email: str
-    address: str
-
-class Patient(BaseModel):
-    first_name: str
-    last_name: str
-    date_of_birth: str
-    gender: str
-    age: int
-    blood_group: str
-    contact: ContactInfo
-    symptoms_description: str
-    patient_file_number: int
-    last_ai_model_response: str
-
-class MedicalHistory(BaseModel):
-    diagnosis: str
-    examination: str
-    examination_date: str
-
-class Medication(BaseModel):
-    medication: str
-
-class VitalSigns(BaseModel):
-    heart_rate: str
-    blood_pressure: str
-    temperature: float
-    blood_sugar: int
-
-class LabResult(BaseModel):
-    date_of_test: str
-    test_name: str
-    test_result: str
-    lab_recommendation: str
-
-class TreatmentPlan(BaseModel):
-    date_of_treatment: str
-    doctor_name: str
-    treatment: str
-
-class PatientData(BaseModel):
-    patient: Patient
-    medical_history: MedicalHistory
-    medications: Medication
-    vital_signs: VitalSigns
-    lab_results: LabResult
-    treatment_plans: TreatmentPlan
+import json  # Import json to handle JSON serialization
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -60,22 +10,50 @@ app = FastAPI()
 # Initialize NER pipeline
 ner_pipeline = pipeline("ner", model="blaze999/Medical-NER", aggregation_strategy="simple")
 
+# Define the Pydantic model based on the new structure
+class PatientData(BaseModel):
+    patient_id: int
+    first_name: str
+    last_name: str
+    personal_numeric_number: int
+    date_of_birth: str
+    gender: str
+    age: int
+    blood_group: str
+    phone: str
+    email: str
+    symptoms_description: str
+    patient_fo_number: int
+    last_ai_model_response: str
+    address: str
+    medical_diagnosis: str
+    examination: str
+    examination_date: str
+    prescribed_medication: str
+    heart_rate: str
+    blood_pressure: str
+    temperature: float
+    blood_sugar: int
+    date_of_test: str
+    test_name: str
+    test_result: str
+    lab_recommendation: str
+
 def analyze_patient_data(patient_data: PatientData, patient_message: str):
     text_to_analyze = f"""
-    Patient ID: {patient_data.patient.patient_file_number}
-    Name: {patient_data.patient.first_name} {patient_data.patient.last_name}
-    DOB: {patient_data.patient.date_of_birth}
-    Gender: {patient_data.patient.gender}
-    Age: {patient_data.patient.age}
-    Blood Group: {patient_data.patient.blood_group}
-    Contact: {patient_data.patient.contact.phone}, {patient_data.patient.contact.email}, {patient_data.patient.contact.address}
-    Symptoms: {patient_data.patient.symptoms_description}
-    Diagnosis: {patient_data.medical_history.diagnosis}
-    Examination: {patient_data.medical_history.examination} on {patient_data.medical_history.examination_date}
-    Current Medications: {patient_data.medications.medication}
-    Vital Signs: Heart Rate: {patient_data.vital_signs.heart_rate}, Blood Pressure: {patient_data.vital_signs.blood_pressure}, Temperature: {patient_data.vital_signs.temperature}, Blood Sugar: {patient_data.vital_signs.blood_sugar}
-    Lab Results: {patient_data.lab_results.test_name} on {patient_data.lab_results.date_of_test} showed: {patient_data.lab_results.test_result}. Recommendation: {patient_data.lab_results.lab_recommendation}
-    Treatment Plan: {patient_data.treatment_plans.treatment} by {patient_data.treatment_plans.doctor_name} on {patient_data.treatment_plans.date_of_treatment}.
+    Patient ID: {patient_data.patient_id}
+    Name: {patient_data.first_name} {patient_data.last_name}
+    DOB: {patient_data.date_of_birth}
+    Gender: {patient_data.gender}
+    Age: {patient_data.age}
+    Blood Group: {patient_data.blood_group}
+    Contact: {patient_data.phone}, {patient_data.email}, {patient_data.address}
+    Symptoms: {patient_data.symptoms_description}
+    Diagnosis: {patient_data.medical_diagnosis}
+    Examination: {patient_data.examination} on {patient_data.examination_date}
+    Current Medications: {patient_data.prescribed_medication}
+    Vital Signs: Heart Rate: {patient_data.heart_rate}, Blood Pressure: {patient_data.blood_pressure}, Temperature: {patient_data.temperature}, Blood Sugar: {patient_data.blood_sugar}
+    Lab Results: {patient_data.test_name} on {patient_data.date_of_test} showed: {patient_data.test_result}. Recommendation: {patient_data.lab_recommendation}
     Additional Case: {patient_message}
     """
 
@@ -135,3 +113,7 @@ def format_results(results):
     for entity_group, items in grouped_results.items():
         formatted_response[entity_group] = items
     return formatted_response
+
+def to_json_with_quotes(data: dict) -> str:
+    """Convert a dictionary to a JSON string with quoted keys."""
+    return json.dumps(data, ensure_ascii=False)
