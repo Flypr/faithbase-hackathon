@@ -10,42 +10,46 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { ChevronLeft, ChevronRight, Check, X } from 'lucide-react';
+import {
+	ChevronLeft,
+	ChevronRight,
+	Check,
+	X,
+	Stethoscope,
+	CalendarDays,
+	UserCircle,
+} from 'lucide-react';
 
 const users = [
 	{
-		id: 1234,
+		id: 1,
 		name: 'John Doe',
 		avatar: '/placeholder.svg?height=50&width=50',
-		message: 'My head hurts',
-		notification: true,
+		problem: 'My stomach hurts in the lower left part when I breathe in.',
 	},
 	{
-		id: 2345,
+		id: 2,
 		name: 'Jane Smith',
 		avatar: '/placeholder.svg?height=50&width=50',
-		message: 'Feeling dizzy',
-		notification: true,
+		problem: "I've been experiencing frequent headaches and dizziness.",
 	},
 	{
-		id: 3456,
+		id: 3,
 		name: 'Bob Johnson',
 		avatar: '/placeholder.svg?height=50&width=50',
-		message: 'Sore throat',
-		notification: true,
+		problem: 'My knee has been swollen and painful for the past week.',
 	},
 	{
-		id: 4567,
+		id: 4,
 		name: 'Alice Brown',
 		avatar: '/placeholder.svg?height=50&width=50',
-		message: 'Back pain',
+		problem: "I've been having trouble sleeping and feel anxious all the time.",
 	},
 	{
-		id: 5678,
-		name: 'Jane Doe',
+		id: 5,
+		name: 'Charlie Davis',
 		avatar: '/placeholder.svg?height=50&width=50',
-		message: 'My head hurts',
+		problem: "I've developed a rash on my arms and it's very itchy.",
 	},
 ];
 
@@ -59,6 +63,7 @@ const specialists = [
 export default function MainDashboard() {
 	const [selectedUser, setSelectedUser] = useState(users[0]);
 	const [selectedSpecialist, setSelectedSpecialist] = useState(null);
+	const [urgency, setUrgency] = useState(null);
 	const [date, setDate] = useState(new Date());
 
 	return (
@@ -115,13 +120,17 @@ export default function MainDashboard() {
 				</Button>
 			</div>
 
-			<div className="grid grid-cols-12 gap-4 pt-8 pb-4 bg-white bg-opacity-65 backdrop-blur-md px-4">
-				<Card className="col-span-4">
+			<div className="grid grid-cols-12 gap-6 pt-8 pb-4 bg-white bg-opacity-65 backdrop-blur-md px-4">
+				{/* Patient Information Card */}
+				<Card className="col-span-5">
 					<CardHeader>
-						<CardTitle>Patient</CardTitle>
+						<CardTitle className="flex items-center space-x-2">
+							<UserCircle className="h-6 w-6" />
+							<span>Patient Information</span>
+						</CardTitle>
 					</CardHeader>
-					<CardContent>
-						<div className="flex items-center space-x-4 mb-4">
+					<CardContent className="space-y-4">
+						<div className="flex items-center space-x-4">
 							<Avatar className="h-16 w-16">
 								<AvatarImage
 									src={selectedUser.avatar}
@@ -136,55 +145,57 @@ export default function MainDashboard() {
 							</Avatar>
 							<div>
 								<h3 className="font-semibold text-lg">{selectedUser.name}</h3>
-								<p className="text-sm text-gray-500">ID: {selectedUser.id}</p>
+								<p className="text-sm text-gray-500">
+									Patient ID: {selectedUser.id}
+								</p>
 							</div>
 						</div>
-						<Card className="rounded-md shadow-none my-2">
-							<CardContent className="p-4 space-y-4">
-								<p className="font-medium">Message: {selectedUser.message}</p>
-								<div className="flex space-x-2">
-									<Button
-										variant="outline"
-										className="flex-1"
-									>
-										Not Urgent
-									</Button>
-									<Button className="flex-1">Schedule Appointment</Button>
-								</div>
-							</CardContent>
-						</Card>
-						<ScrollArea className="h-[200px]">
+						<div className="bg-gray-100 p-3 rounded-md">
+							<h4 className="font-semibold mb-2">Patient&apos;s Message:</h4>
+							<p className="text-sm">{selectedUser.problem}</p>
+						</div>
+						<div className="bg-blue-100 p-3 rounded-md">
+							<h4 className="font-semibold mb-2">AI Analysis:</h4>
+							<p className="text-sm">
+								Based on the symptoms described, the patient may be experiencing
+								[AI-generated analysis here].
+							</p>
+						</div>
+						<div className="flex space-x-4">
+							<Button
+								variant={urgency === 'not-urgent' ? 'default' : 'outline'}
+								onClick={() => setUrgency('not-urgent')}
+							>
+								Not Urgent
+							</Button>
+							<Button
+								variant={urgency === 'schedule' ? 'default' : 'outline'}
+								onClick={() => setUrgency('schedule')}
+							>
+								Schedule Appointment
+							</Button>
+						</div>
+						<ScrollArea className="h-48 w-full rounded-md border p-4">
 							<Accordion
 								type="single"
 								collapsible
-								className="w-full"
 							>
 								<AccordionItem value="medical-history">
 									<AccordionTrigger>Medical History</AccordionTrigger>
 									<AccordionContent>
-										<ul className="list-disc list-inside">
-											<li>Hypertension (diagnosed 2018)</li>
-											<li>Appendectomy (2015)</li>
-											<li>Allergic to penicillin</li>
-										</ul>
+										[Patient&apos;s medical history details here]
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="medication">
 									<AccordionTrigger>Medication</AccordionTrigger>
 									<AccordionContent>
-										<ul className="list-disc list-inside">
-											<li>Lisinopril 10mg daily</li>
-											<li>Metformin 500mg twice daily</li>
-											<li>Aspirin 81mg daily</li>
-										</ul>
+										[Patient&apos;s current medications here]
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="allergies">
 									<AccordionTrigger>Allergies</AccordionTrigger>
 									<AccordionContent>
-										<ul className="list-disc list-inside">
-											<li>Penicillin</li>
-										</ul>
+										[Patient&apos;s allergies here]
 									</AccordionContent>
 								</AccordionItem>
 							</Accordion>
@@ -192,88 +203,104 @@ export default function MainDashboard() {
 					</CardContent>
 				</Card>
 
+				{/* Recommended Specialists Card */}
 				<Card className="col-span-4">
 					<CardHeader>
-						<CardTitle>Suggested Specialists</CardTitle>
+						<CardTitle className="flex items-center space-x-2">
+							<Stethoscope className="h-6 w-6" />
+							<span>Recommended Specialists</span>
+						</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<RadioGroup
-							value={selectedSpecialist || ''}
-							onValueChange={setSelectedSpecialist}
-						>
-							{specialists.map((specialist) => (
-								<div
-									key={specialist.id}
-									className="flex items-center justify-between space-x-2 mb-4"
-								>
-									<div className="flex items-center space-x-2">
-										<Avatar className="h-12 w-12">
-											<AvatarFallback>
-												{specialist.name
-													.split(' ')
-													.map((n) => n[0])
-													.join('')}
-											</AvatarFallback>
-										</Avatar>
-										<div>
-											<p className="font-medium">{specialist.name}</p>
-											<p className="text-sm text-gray-500">
-												{specialist.specialization}
-											</p>
+						<ScrollArea className="h-[400px] w-full rounded-md border">
+							<div className="p-4 space-y-4">
+								{specialists.map((specialist) => (
+									<div
+										key={specialist.id}
+										className="flex items-center justify-between p-2 bg-gray-100 rounded-md"
+									>
+										<div className="flex items-center space-x-4">
+											<Avatar>
+												<AvatarImage
+													src={specialist.avatar}
+													alt={specialist.name}
+												/>
+												<AvatarFallback>
+													{specialist.name
+														.split(' ')
+														.map((n) => n[0])
+														.join('')}
+												</AvatarFallback>
+											</Avatar>
+											<div>
+												<p className="font-semibold">{specialist.name}</p>
+												<p className="text-sm text-gray-500">
+													{specialist.specialty}
+												</p>
+											</div>
+										</div>
+										<div className="flex space-x-2">
+											<Button
+												size="sm"
+												variant={
+													selectedSpecialist === specialist.id
+														? 'default'
+														: 'outline'
+												}
+												onClick={() => setSelectedSpecialist(specialist.id)}
+											>
+												<Check className="h-4 w-4" />
+											</Button>
+											<Button
+												size="sm"
+												variant="outline"
+												onClick={() => setSelectedSpecialist(null)}
+											>
+												<X className="h-4 w-4" />
+											</Button>
 										</div>
 									</div>
-									<div className="flex items-center space-x-2">
-										<RadioGroupItem
-											value={specialist.id.toString()}
-											id={`specialist-${specialist.id}`}
-											className="sr-only"
-										/>
-										<label
-											htmlFor={`specialist-${specialist.id}`}
-											className={`cursor-pointer p-1 rounded-full ${
-												selectedSpecialist === specialist.id.toString()
-													? 'bg-green-500 text-white'
-													: 'bg-gray-200'
-											}`}
-										>
-											<Check className="h-4 w-4" />
-										</label>
-										<Button
-											variant="ghost"
-											size="icon"
-											className="text-red-500 hover:text-red-600"
-											onClick={() => setSelectedSpecialist(null)}
-										>
-											<X className="h-4 w-4" />
-										</Button>
-									</div>
-								</div>
-							))}
-						</RadioGroup>
+								))}
+							</div>
+						</ScrollArea>
 					</CardContent>
 				</Card>
 
-				<Card className="col-span-4">
+				{/* Appointment Scheduling Card */}
+				<Card className="col-span-3">
 					<CardHeader>
-						<CardTitle className="text-center">
-							Appointment with Specialist
+						<CardTitle className="flex items-center space-x-2">
+							<CalendarDays className="h-6 w-6" />
+							<span>Schedule Appointment</span>
 						</CardTitle>
 					</CardHeader>
-					<CardContent className="flex flex-col items-center">
-						<Calendar
-							mode="single"
-							selected={date}
-							onSelect={setDate}
-							className="rounded-md border"
-						/>
-						{selectedSpecialist && (
-							<p className="mt-4 text-center text-sm text-gray-500">
-								Appointment with{' '}
-								{
-									specialists.find(
-										(s) => s.id.toString() === selectedSpecialist
-									)?.name
-								}
+					<CardContent>
+						{selectedSpecialist ? (
+							<>
+								<div className="mb-4">
+									<h3 className="font-semibold mb-2">Selected Specialist:</h3>
+									<p>
+										{specialists.find((s) => s.id === selectedSpecialist)?.name}
+									</p>
+									<p className="text-sm text-gray-500">
+										{
+											specialists.find((s) => s.id === selectedSpecialist)
+												?.specialty
+										}
+									</p>
+								</div>
+								<div className="flex flex-col items-start">
+									<Calendar
+										mode="single"
+										selected={date}
+										onSelect={setDate}
+										className="rounded-md border"
+									/>
+								</div>
+							</>
+						) : (
+							<p className="text-center text-gray-500">
+								Please select a specialist to schedule an appointment.
 							</p>
 						)}
 					</CardContent>
