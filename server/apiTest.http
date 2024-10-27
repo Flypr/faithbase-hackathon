@@ -2,5 +2,5 @@ POST http://localhost:3001/patients/patient/updateSymptoms/1
 Content-Type: application/json
 
 {
-  "symptoms": "test"
+  "symptoms": "I have insomnia, dizziness and palpitations"
 }
