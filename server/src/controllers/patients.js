@@ -72,6 +72,7 @@ patientsRouter.post("/patient/updateSymptoms/:id", async (req, res) => {
     }
 
     const doctors_list = await db.getDoctors();
+    console.log(doctors_list);
     if (!doctors_list) {
       throw new AppError("Get doctors failed", 404);
     }
@@ -89,10 +90,10 @@ patientsRouter.post("/patient/updateSymptoms/:id", async (req, res) => {
       body: JSON.stringify(dummyPatient),
     });
     const ai_response = await ai_promt.json();
-    const llm_info = await model_response(doctors_list, ai_response.results);
-    //
 
-    res.status(200).json({ message: "Symptoms updated successfully", ai_response: llm_info });
+    const openai_data = await model_response(doctors_list, ai_response);
+    //
+    res.status(200).json({ message: "Symptoms updated successfully", openai_data });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
