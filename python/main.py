@@ -90,7 +90,7 @@ def analyze(patient_data: PatientData, patient_message: str):
 
         # Format the results nicely
         formatted_results = format_results(results)
-
+        print(formatted_results)
         return {"results": formatted_results}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

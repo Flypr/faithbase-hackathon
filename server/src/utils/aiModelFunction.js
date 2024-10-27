@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { OpenAI } from "openai";
 
 const openai = new OpenAI();
 
@@ -49,11 +49,10 @@ const model_response = async (doctors_list, llm_info) => {
       },
       {
         "role": "user",
-        "content": `Based on ${doctors_list} and ${llm_info} do the matching with the best specialist and return in json format the specialist that you recomand`
+        "content": `Based on the data:\n\n${JSON.stringify(doctors_list)}\n\n${JSON.stringify(llm_info)}\n\n Generate a medical recommendation and a doctor from the list.`
       }
     ]
   });
-  console.log(completion.choices[0].message.content)
   return completion.choices[0].message.content
 }
 
