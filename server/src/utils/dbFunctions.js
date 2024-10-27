@@ -5,7 +5,7 @@ import { AppError } from "../middleware/errorHandler.js";
 const getPatients = async () => {
   try {
     const db = await dbPromise;
-    const patients = await db.all("SELECT * FROM Patients;");
+    const patients = await db.all("SELECT * FROM patients;");
     if (!patients) {
       throw new AppError("No pacients found", 404);
     }
@@ -18,7 +18,7 @@ const getPatients = async () => {
 const getAllPacientInfo = async (id) => {
   try {
     const db = await dbPromise;
-    const pacient = await db.get("SELECT p.Patient_id, p.First_name, p.Last_name, p.Personal_numeric_number, p.Date_of_birth, p.Gender, p.Age, p.Blood_group, p.Phone, p.Email, p.Symptoms_description, p.Patient_fo_number, p.Last_ai_model_response, p.Address, mh.Diagnosis AS Medical_Diagnosis, mh.Examination AS Examination, mh.Examination_date AS Examination_Date, m.Medication AS Prescribed_Medication, vs.Heart_rate, vs.Blood_pressure, vs.Temperature, vs.Blood_sugar, lr.Date_of_test AS Date_of_Test, lr.Test_name, lr.Test_result, lr.Lab_recomandation AS Lab_Recommendation FROM Patients p LEFT JOIN Medical_history mh ON p.Patient_id = mh.Patient_id LEFT JOIN Medications m ON p.Patient_id = m.Patient_id LEFT JOIN Vital_signs vs ON p.Patient_id = vs.Patient_id LEFT JOIN Lab_results lr ON p.Patient_id = lr.Patient_id WHERE p.Patient_id = ?;", id);
+    const pacient = await db.get("SELECT p.patient_id, p.first_name, p.last_name, p.personal_numeric_number, p.date_of_birth, p.gender, p.age, p.blood_group, p.phone, p.email, p.symptoms_description, p.patient_fo_number, p.last_ai_model_response, p.address, mh.diagnosis AS medical_diagnosis, mh.examination AS examination, mh.examination_date AS examination_date, m.medication AS prescribed_medication, vs.heart_rate, vs.blood_pressure, vs.temperature, vs.blood_sugar, lr.date_of_test AS date_of_test, lr.test_name, lr.test_result, lr.lab_recomandation AS lab_recommendation FROM patients p LEFT JOIN medical_history mh ON p.patient_id = mh.patient_id LEFT JOIN medications m ON p.patient_id = m.patient_id LEFT JOIN vital_signs vs ON p.patient_id = vs.patient_id LEFT JOIN lab_results lr ON p.patient_id = lr.patient_id WHERE p.patient_id = ?;", id);
     if (!pacient) {
       throw new AppError("No pacients found", 404);
     }
@@ -32,12 +32,12 @@ const getAllPacientInfo = async (id) => {
 const addPacientAllData = async (data) => {
   try {
     const db = await dbPromise;
-    const patient = await db.run("INSERT INTO Patients (First_name, Personal_numeric_number, Last_name, Date_of_birth, Gender, Age, Blood_group, Phone, Email, Symptoms_description, Patient_fo_number, Last_ai_model_response, Address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", data.Patient.First_name, data.Patient.Personal_numeric_number, data.Patient.Last_name, data.Patient.Date_of_birth, data.Patient.Gender, data.Patient.Age, data.Patient.Blood_group, data.Patient.Phone, data.Patient.Email, data.Patient.Symptoms_description, data.Patient.Patient_fo_number, data.Patient.Last_ai_model_response, data.Patient.Address);
-    const medical_history = await db.run("Insert INTO Medical_history (Patient_id, Diagnosis, Examination, Examination_date) VALUES (?,?,?,?);", patient.lastID, data.Medical_history.Diagnosis, data.Medical_history.Examination, data.Medical_history.Examination_date);
-    const medications = await db.run("INSERT INTO Medications (Patient_id, Medication) VALUES (?,?);", patient.lastID, data.Medications.Medication);
-    const vital_signs = await db.run("INSERT INTO Vital_signs (Patient_id, Heart_rate, Blood_pressure, Temperature, Blood_sugar) VALUES (?,?,?,?,?);", patient.lastID, data.Vital_signs.Heart_rate, data.Vital_signs.Blood_pressure, data.Vital_signs.Temperature, data.Vital_signs.Blood_sugar);
-    const lab_results = await db.run("INSERT INTO Lab_results (Patient_id, Date_of_test, Test_name, Test_result, Lab_recomandation) VALUES (?,?,?,?,?);", patient.lastID, data.Lab_results.Date_of_test, data.Lab_results.Test_name, data.Lab_results.Test_result, data.Lab_results.Lab_recomandation);
-    const treatment_plans = await db.run("INSERT INTO Treatment_plans (Patient_id, Date_of_treatment, Doctor_name, Treatment) VALUES (?,?,?,?);", patient.lastID, data.Treatment_plans.Date_of_treatment, data.Treatment_plans.Doctor_name, data.Treatment_plans.Treatment);
+    const patient = await db.run("INSERT INTO patients (first_name, personal_numeric_number, last_name, date_of_birth, gender, age, blood_group, phone, email, symptoms_description, patient_fo_number, last_ai_model_response, address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", data.patient.first_name, data.patient.personal_numeric_number, data.patient.last_name, data.patient.date_of_birth, data.patient.gender, data.patient.age, data.patient.blood_group, data.patient.phone, data.patient.email, data.patient.symptoms_description, data.patient.patient_fo_number, data.patient.last_ai_model_response, data.patient.address);
+    const medical_history = await db.run("Insert INTO medical_history (patient_id, diagnosis, examination, examination_date) VALUES (?,?,?,?);", patient.lastID, data.medical_history.diagnosis, data.medical_history.examination, data.medical_history.examination_date);
+    const medications = await db.run("INSERT INTO medications (patient_id, medication) VALUES (?,?);", patient.lastID, data.medications.medication);
+    const vital_signs = await db.run("INSERT INTO vital_signs (patient_id, heart_rate, blood_pressure, temperature, blood_sugar) VALUES (?,?,?,?,?);", patient.lastID, data.vital_signs.heart_rate, data.vital_signs.blood_pressure, data.vital_signs.temperature, data.vital_signs.blood_sugar);
+    const lab_results = await db.run("INSERT INTO lab_results (patient_id, date_of_test, test_name, test_result, lab_recomandation) VALUES (?,?,?,?,?);", patient.lastID, data.lab_results.date_of_test, data.lab_results.test_name, data.lab_results.test_result, data.lab_results.lab_recomandation);
+    const treatment_plans = await db.run("INSERT INTO treatment_plans (patient_id, date_of_treatment, doctor_name, treatment) VALUES (?,?,?,?);", patient.lastID, data.treatment_plans.date_of_treatment, data.treatment_plans.doctor_name, data.treatment_plans.treatment);
     if (!patient || !medical_history || !medications || !vital_signs || !lab_results || !treatment_plans) {
       throw new AppError("Insert failed", 404);
     }
@@ -51,7 +51,7 @@ const addPacientAllData = async (data) => {
 const updatePatientSymptoms = async (id, symptoms) => {
   try {
     const db = await dbPromise;
-    const patient = await db.run("UPDATE Patients SET Symptoms_description = ? WHERE Patient_id = ?;", symptoms, id);
+    const patient = await db.run("UPDATE patients SET symptoms_description = ? WHERE patient_id = ?;", symptoms, id);
     if (!patient) {
       throw new AppError("Update failed", 404);
     }
@@ -64,7 +64,7 @@ const updatePatientSymptoms = async (id, symptoms) => {
 const updatePatientAiModelResponse = async (id, aiModelResponse) => {
   try {
     const db = await dbPromise;
-    const patient = await db.run("UPDATE Patients SET Last_ai_model_response = ? WHERE Patient_id = ?;", aiModelResponse, id);
+    const patient = await db.run("UPDATE patients SET last_ai_model_response = ? WHERE patient_id = ?;", aiModelResponse, id);
     if (!patient) {
       throw new AppError("Update failed", 404);
     }
@@ -77,7 +77,7 @@ const updatePatientAiModelResponse = async (id, aiModelResponse) => {
 const getDoctors = async () => {
   try {
     const db = await dbPromise;
-    const doctors = await db.all("SELECT * FROM Doctors;");
+    const doctors = await db.all("SELECT * FROM doctors;");
     if (!doctors) {
       throw new AppError("Get doctors failed", 404);
     }
@@ -90,7 +90,7 @@ const getDoctors = async () => {
 const addDoctor = async (data) => {
   try {
     const db = await dbPromise;
-    const doctor = await db.run("INSERT INTO Doctors (First_name, Last_name, Specialty, Phone, Email, License_number, Hospital_affiliation, Address, Description, Experience) VALUES (?,?,?,?,?,?,?,?,?,?);", data.First_name, data.Last_name, data.Specialty, data.Phone, data.Email, data.License_number, data.Hospital_affiliation, data.Address, data.Description, data.Experience);
+    const doctor = await db.run("INSERT INTO doctors (first_name, last_name, specialty, phone, email, license_number, hospital_affiliation, address, description, experience) VALUES (?,?,?,?,?,?,?,?,?,?);", data.first_name, data.last_name, data.specialty, data.phone, data.email, data.license_number, data.hospital_affiliation, data.address, data.description, data.experience);
     if (!doctor) {
       throw new AppError("Insert doctor failed", 404);
     }
@@ -103,7 +103,7 @@ const addDoctor = async (data) => {
 const getDoctorInfo = async (id) => {
   try {
     const db = await dbPromise;
-    const doctor = await db.get("SELECT * FROM Doctors WHERE Doctor_id = ?;", id);
+    const doctor = await db.get("SELECT * FROM doctors WHERE doctor_id = ?;", id);
     if (!doctor) {
       throw new AppError("Get doctor failed", 404);
     }
