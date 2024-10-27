@@ -22,31 +22,32 @@ import {
 
 const users = [
 	{
-		id: 1,
+		id: 12345,
 		name: 'John Doe',
 		avatar: '/placeholder.svg?height=50&width=50',
-		problem: 'My stomach hurts in the lower left part when I breathe in.',
+		problem:
+			"Recently I've started feeling fatigued more and more often, and experiencing joint pain.",
 	},
 	{
-		id: 2,
+		id: 23456,
 		name: 'Jane Smith',
 		avatar: '/placeholder.svg?height=50&width=50',
 		problem: "I've been experiencing frequent headaches and dizziness.",
 	},
 	{
-		id: 3,
+		id: 34567,
 		name: 'Bob Johnson',
 		avatar: '/placeholder.svg?height=50&width=50',
 		problem: 'My knee has been swollen and painful for the past week.',
 	},
 	{
-		id: 4,
+		id: 4546,
 		name: 'Alice Brown',
 		avatar: '/placeholder.svg?height=50&width=50',
 		problem: "I've been having trouble sleeping and feel anxious all the time.",
 	},
 	{
-		id: 5,
+		id: 5534,
 		name: 'Charlie Davis',
 		avatar: '/placeholder.svg?height=50&width=50',
 		problem: "I've developed a rash on my arms and it's very itchy.",
@@ -54,16 +55,31 @@ const users = [
 ];
 
 const specialists = [
-	{ id: 1, name: 'Dr. Emily Chen', specialization: 'Neurologist' },
-	{ id: 2, name: 'Dr. Michael Patel', specialization: 'Cardiologist' },
-	{ id: 3, name: 'Dr. Sarah Johnson', specialization: 'Dermatologist' },
-	{ id: 4, name: 'Dr. David Lee', specialization: 'Orthopedist' },
+	{
+		id: 1,
+		name: 'Dr. Emily Chen',
+		specialty: 'Cardiologist',
+		avatar: '/placeholder.svg?height=50&width=50',
+	},
+	{
+		id: 2,
+		name: 'Dr. Sarah Johnson',
+		specialty: 'Nutritionist',
+		avatar: '/placeholder.svg?height=50&width=50',
+	},
+	{
+		id: 3,
+		name: 'Dr. Lisa Brown',
+		specialty: 'Rheumatologist',
+		avatar: '/placeholder.svg?height=50&width=50',
+	},
 ];
 
 export default function MainDashboard() {
 	const [selectedUser, setSelectedUser] = useState(users[0]);
 	const [selectedSpecialist, setSelectedSpecialist] = useState(null);
 	const [urgency, setUrgency] = useState(null);
+	const [selected, setSelected] = useState(false);
 	const [date, setDate] = useState(new Date());
 
 	return (
@@ -157,8 +173,11 @@ export default function MainDashboard() {
 						<div className="bg-blue-100 p-3 rounded-md">
 							<h4 className="font-semibold mb-2">AI Analysis:</h4>
 							<p className="text-sm">
-								Based on the symptoms described, the patient may be experiencing
-								[AI-generated analysis here].
+								Based on the symptoms of fatigue, joint pain, and recent weight
+								changes, our algorithm has identified potential concerns related
+								to the pacient cardiovascular health, metabolism, and joint
+								function. The following specialists have been recommended to
+								address these issues comprehensively.
 							</p>
 						</div>
 						<div className="flex space-x-4">
@@ -304,6 +323,14 @@ export default function MainDashboard() {
 										onSelect={setDate}
 										className="rounded-md border"
 									/>
+								</div>
+								<div className="flex space-x-4 mt-4">
+									<Button
+										variant={selected ? 'default' : 'outline'}
+										onClick={() => setSelected(true)}
+									>
+										Schedule Specialist
+									</Button>
 								</div>
 							</>
 						) : (

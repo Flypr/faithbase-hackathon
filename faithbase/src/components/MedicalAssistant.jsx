@@ -30,29 +30,29 @@ export default function MedicalAssistant() {
 		// Simulating API call and response
 		setTimeout(() => {
 			setProblem(
-				'Potential migraine headaches with associated visual disturbances and nausea'
+				'Potential concerns include cardiovascular health, metabolism, and joint function. Consulting cardiology, endocrinology, or rheumatology specialists is recommended.'
 			);
 			setDoctors([
 				{
 					id: '1',
 					name: 'Dr. Emily Chen',
-					specialty: 'Neurologist',
+					specialty: 'Cardiologist',
 					experience: '15 years',
 					education: 'MD from Johns Hopkins University',
 					avatar: '/placeholder.svg?height=50&width=50',
 				},
 				{
 					id: '2',
-					name: 'Dr. Michael Patel',
-					specialty: 'Headache Specialist',
+					name: 'Dr. Sarah Johnson',
+					specialty: 'Nutritionist',
 					experience: '10 years',
 					education: 'MD from Harvard Medical School',
 					avatar: '/placeholder.svg?height=50&width=50',
 				},
 				{
 					id: '3',
-					name: 'Dr. Sarah Johnson',
-					specialty: 'Pain Management',
+					name: 'Dr. Lisa Brown',
+					specialty: 'Rheumatologist',
 					experience: '12 years',
 					education: 'MD from Stanford University',
 					avatar: '/placeholder.svg?height=50&width=50',
